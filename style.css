@@ -1,0 +1,102 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.btn{
+    padding: 10px 20px;
+    background-color: black;
+    color: white;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-left: 20px;
+}
+
+div.name{
+    text-align: center;
+    font-size: 2rem;
+}
+
+div.parent{
+    /* background-color: #111; */
+    background-color: #fff;
+    width: 100Vw;
+    height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+div.child{
+    margin-top: 20px;
+    padding: 10px;
+    background-color: rgb(243, 243, 243);
+    width: 60vw;
+    /* max-width:600px; */
+    min-height: 40vh;
+    border-radius: 10px;
+}
+
+.en-task{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+#add-t{
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 10px;
+}
+.task-list{
+    padding: 10px 20px;
+}
+
+.task{
+    display: flex;
+    /* background-color: pink; */
+    justify-content: space-between;
+    align-items: center;
+   margin-bottom: 10px;
+}
+.task .task-name{
+    background-color: #fff;
+    padding: 10px 20px;
+    width: 70%;
+    font-size: 1rem;
+    font-weight: 400;
+    border-radius: 10px;
+
+    position:relative;
+    
+}
+
+/* p.task-name::before{
+    content: "";
+    width: 20px;
+    height: 20px;
+    background-image: url('./images/unchecked.jpeg');
+    position: absolute;
+    font-size: 20px;
+    top:0;
+    left:6px;
+} */
+
+.done{
+  font-size: 20px;
+  padding: 10px;
+  background-color: white;
+  cursor: pointer;
+  border-radius: 10px;
+}
+.done:hover{
+    background-color: rgb(243, 243, 243);
+}
+
+@media (max-width:700px) {
+    .task{
+        margin-right: 10px;
+    }
+}
