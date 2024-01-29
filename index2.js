@@ -1,112 +1,70 @@
+let task = document.getElementById('add-t');
+let add = document.getElementById('add');
+let list = document.getElementById('mytasks');
 
-
-let task=document.getElementById('add-t');
-let add=document.getElementById('add')
-let list=document.getElementById('mytasks')
-
-let del=document.getElementsByClassName('done')
-console.log(del)
-
+let del = document.getElementsByClassName('done');
+console.log(del);
 
 showList();
 
-
-add.addEventListener('click',()=>{
-    
-    let taskList=localStorage.getItem('taskList')
-    // console.log("btnclk",taskList)
-    if(taskList==null){
-        store=[]
+add.addEventListener('click', () => {
+    let taskList = localStorage.getItem('taskList');
+    if (taskList == null) {
+        store = [];
+    } else {
+        store = JSON.parse(taskList);
     }
-    else{
-        store=JSON.parse(taskList)
-        console.log('first-store',store)
+
+    let msg = task.value;
+    store.push(msg);
+    localStorage.setItem('taskList', JSON.stringify(store));
+
+    task.value = '';
+    addToList(msg);
+});
+
+list.addEventListener('click', (e) => {
+    if (e.target.classList.contains('done')) {
+        // Remove the task element from the DOM
+        e.target.parentElement.remove();
+
+        // Get the index of the clicked task
+        let index = Array.from(list.children).indexOf(e.target.parentElement);
+
+        // Remove the task from localStorage
+        let mystore = JSON.parse(localStorage.getItem('taskList'));
+        mystore.splice(index, 1);
+        localStorage.setItem('taskList', JSON.stringify(mystore));
     }
-        let msg=task.value;
-        store.push(msg)
-        // console.log("store",store)
-        localStorage.setItem('taskList',JSON.stringify(store))
-        // console.log("localstorge",localStorage.getItem('taskList'))
+});
 
-        task.value=''
-        addToList(msg)
-        
-        // console.log(para)
-        
+function showList() {
+    let taskList = localStorage.getItem('taskList');
+    if (taskList == null) {
+        store = [];
+    } else {
+        store = JSON.parse(taskList);
+    }
 
-})
-
-// console.log(list)
-
-
-list.addEventListener('click',(e)=>{
-    // if(e.target.classList.contains('done')){
-    //     e.target.parent.remove();
-    // }
-    // e.target.parent.remove();
-    let task=e.target.parentElement
-    console.log('e.target',task)
-    console.log(e.target.parentElement.remove())
-    let store=JSON.parse(localStorage.getItem('taskList'))
-    StorageEvent.forEach((item,i)=>{
-        i.addEventListener('click',()=>{
-            store.splice(store,i)
-        })
-    })
-    localStorage.setItem('taskList',JSON.stringify(store))
-
-    location.reload()
-
-
-})
-
-function showList(){
-let taskList=localStorage.getItem('taskList');
-
-if(taskList==null){
-    store=[];
-}
-else{
-    store=JSON.parse(taskList)
-    console.log('in else of showlist',store)
-}
-    store.forEach((task)=>{
-    
-        console.log(task)
-        let newdiv=document.createElement('div');
-        let para=document.createElement('p')
-        let innerDiv=document.createElement('div')
-    
-        newdiv.classList.add('task')
-        para.classList.add('task-name')
-        innerDiv.classList.add('done')
-    
-        para.innerHTML=task;
-        innerDiv.innerHTML="X";
-        newdiv.appendChild(para);
-        newdiv.appendChild(innerDiv);
-    
-        list.appendChild(newdiv)
-
-
-    })
-
+    store.forEach((task) => {
+        addToList(task);
+    });
 }
 
-function addToList(task){
-    let newdiv=document.createElement('div');
-    let para=document.createElement('p')
-    let innerDiv=document.createElement('div')
+function addToList(task) {
+    let newdiv = document.createElement('div');
+    let para = document.createElement('p');
+    let innerDiv = document.createElement('div');
 
-    newdiv.classList.add('task')
-    para.classList.add('task-name')
-    innerDiv.classList.add('done')
+    newdiv.classList.add('task');
+    para.classList.add('task-name');
+    innerDiv.classList.add('done');
 
-    para.innerHTML=task;
-    innerDiv.innerHTML="X";
+    para.innerHTML = task;
+    innerDiv.innerHTML = 'X';
+
     newdiv.appendChild(para);
     newdiv.appendChild(innerDiv);
 
-    list.appendChild(newdiv)
-
+    list.appendChild(newdiv);
 }
